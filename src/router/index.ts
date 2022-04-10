@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
+import { createRouter, createWebHashHistory, createWebHistory, RouteRecordRaw } from 'vue-router';
 import isAuthenticatedGuard from './auth-guard';
 import authRouter from '../modules/auth/router'
 import homeRouter from '../modules/home/router'
@@ -17,7 +17,7 @@ const routes: RouteRecordRaw[] = [
 ]
 
 const router = createRouter({ 
-    history: createWebHistory(),
+    history: createWebHashHistory(),
     routes
 });
 
