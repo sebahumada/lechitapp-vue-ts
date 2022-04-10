@@ -12,11 +12,14 @@
     </span>
     <div class="offcanvas offcanvas-start bg-success text-white" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel" >
     <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasExampleLabel">Lechitapp</h5>
+        <h5 class="offcanvas-title" id="offcanvasExampleLabel">LechitApp</h5>
         <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body">
-        Menu
+        
+        <router-link :to="{name: 'principal'}" @click="close"><i className="fas fa-home"></i> Home</router-link>
+        <br />
+        <router-link :to="{name: 'add'}" @click="close"><i className="fas fa-pen"></i> Ingresar</router-link>
         
     </div>
     </div>
@@ -26,6 +29,16 @@
 
 </template>
 
+<script lang="ts" setup>
+
+const close = ()=>{
+    let closeCanvas = document.querySelector('[data-bs-dismiss="offcanvas"]') as HTMLButtonElement;
+    closeCanvas.click();
+    
+}
+
+
+</script>
 
 <style scoped>
 
@@ -40,6 +53,11 @@
 
 .imgBebe {
     max-width: 20%;    
+}
+
+a{
+    color:#ffffff;
+    text-decoration: none;
 }
 
 </style>

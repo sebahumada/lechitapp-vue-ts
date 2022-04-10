@@ -8,10 +8,15 @@ export default {
         {
             path:'/',
             name:'principal',
-            component: ()=> import('../views/HomeView.vue'),
-            
+            component: ()=> import('../views/HomeView.vue')           
 
-        }
+        },
+        {
+            path:'/add',
+            name:'add',
+            component: ()=> import('../views/AddView.vue')           
+
+        },
     ]
 
 

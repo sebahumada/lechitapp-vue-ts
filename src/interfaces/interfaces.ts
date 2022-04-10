@@ -18,3 +18,10 @@ export interface Register {
     tipo: string;
     id:string;
 }
+
+export interface CountDown {
+
+    mensaje:string;
+    minutos:number;
+
+}
