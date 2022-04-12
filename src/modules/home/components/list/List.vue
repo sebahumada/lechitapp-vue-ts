@@ -76,9 +76,15 @@ const handleDelete = async(id:string)=>{
 
 
 watch( async()=> dateQuery.value,
-    async(val)=>{        
+    async(val, prev)=>{        
         isReady.value = false;
-        registers.value = await getDayRegisters(await val);
+        const dateChange = await val;
+        if(dateChange){
+
+            registers.value = await getDayRegisters(await val);
+        } else{
+            dateQuery.value = await prev;
+        }
         isReady.value = true;
     }
 );
@@ -86,7 +92,8 @@ watch( async()=> dateQuery.value,
 watch( async()=> idDelete.value,
         async(val)=>{
             isReady.value = false;
-            console.log('del', await val);
+            
+            
             
             registers.value = await getDayRegisters(await dateQuery.value);
             isReady.value = true;

@@ -7,8 +7,8 @@
             <div class='table-responsive'>
 
             
-                <table class="table table-success table-striped text-center table-hover">
-                        <thead class='table-success'>
+                <table class="table table-primary table-striped text-center table-hover">
+                        <thead class="table-borderless">
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">Tipo</th>
