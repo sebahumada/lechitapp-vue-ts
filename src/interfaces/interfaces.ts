@@ -19,6 +19,14 @@ export interface Register {
     id:string;
 }
 
+export interface Formulario {
+    cantidad:number;
+    fecha: string;
+    hora: string;
+    nocturno: boolean;
+    tipo: string;    
+}
+
 export interface CountDown {
 
     mensaje:string;

@@ -1,7 +1,7 @@
-import { collection, query, orderBy as ordby, limit, getDocs, where } from "@firebase/firestore";
+import { collection, query, orderBy as ordby, limit, getDocs, where, addDoc, doc, getDoc, updateDoc, deleteDoc } from "@firebase/firestore";
 import { orderBy, sumBy } from "lodash";
 import { db } from ".";
-import { Register } from "../interfaces/interfaces";
+import { Register, Formulario } from '../interfaces/interfaces';
 
 
 
@@ -23,6 +23,83 @@ export const getLastRegister = async():Promise<Register>=>{
     }
 
     return result;
+}
+
+
+export const insertRegister = async(register:Formulario):Promise<boolean> =>{
+
+    let resp=false;
+    try {
+        const lecheCollectionRef = collection(db,'gaspiLeche');
+
+        await addDoc(lecheCollectionRef, register );
+        resp=true;
+
+    } catch (error) {
+        console.error(error);
+    }
+
+    return resp;
+
+}
+
+
+export const editRegister = async(id:string, register:Formulario):Promise<boolean> =>{
+
+    let resp = false;
+
+    try {
+        
+        const docRef = doc(db,'gaspiLeche',id);
+        await updateDoc(docRef, {
+            ...register
+        });
+
+        resp = true;
+
+    } catch (error) {
+        console.error(error);
+        
+    }
+
+
+    return resp;
+
+}
+
+export const deleteRegister = async(id:string):Promise<boolean> => {
+
+    let resp = false;
+
+    try {
+        
+        const userDoc = doc(db,'gaspiLeche', id);
+        await deleteDoc(userDoc);
+
+        resp = true;
+
+    } catch (error) {
+        console.error(error);
+    }
+
+    return resp;
+
+}
+
+export const getRegisterById = async(id:string):Promise<Register> => {
+
+    const docRef = doc(db,'gaspiLeche',id);
+    const dataResp=await getDoc(docRef);
+
+    const registerAux = {
+        id: dataResp.id,
+        ...dataResp.data()
+    }
+
+    const register = registerAux as Register;
+
+    return register;
+    
 }
 
 export const getDayRegisters = async(day:string):Promise<Register[]> =>{

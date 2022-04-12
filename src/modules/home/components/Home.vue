@@ -54,7 +54,9 @@
     </template>
 
     <template v-else>
-        Espere...
+        <div class="spinner-border mt-4" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
     </template>
 
     

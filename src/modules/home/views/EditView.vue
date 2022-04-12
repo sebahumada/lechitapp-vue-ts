@@ -1,10 +1,9 @@
 <template>
-    <List />
+    <Edit />
 </template>
 
-
 <script lang="ts" setup>
-import List from '../components/list/List.vue';
+import Edit from '../components/Edit.vue';
 
 
 

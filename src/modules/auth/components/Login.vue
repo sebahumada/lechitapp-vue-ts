@@ -5,13 +5,9 @@
                 <button class='btn btn-primary' @click="signInWithGoogle"><i class="fab fa-google"></i> Ingresar con Google</button>
             </template>
             <template v-else>
-                <span>{{ JSON.stringify(userProfile,null,3)}}</span>
-                <br />
-                <span>Entrando en {{ seconds }}s.</span>
-                <br />
-                <button class='btn btn-danger' @click="handleSalir">
-                   <i class="fas fa-sign-out-alt"></i> Salir
-                </button>
+                <div className="spinner-border mt-4" role="status">
+                    <span className="visually-hidden">Loading...</span>
+                </div>
             </template>
         </template>
 
@@ -66,7 +62,7 @@ const isLogged = ref(false);
 const isReady = ref(false);
 const userProfile = ref({});
 const router = useRouter();
-const seconds = ref(5);
+const seconds = ref(2);
 
 setInterval(()=>{
 if(isReady.value && seconds.value===0){
@@ -104,15 +100,6 @@ const signInWithGoogle = ():void=>{
 }
 
 
-const handleSalir = async ()=>{
-        await auth.signOut();
-        
-        console.log('saliendo...');
-        
-        isLogged.value = false;
-        userProfile.value = {};
-        
 
-    }
 </script>
 

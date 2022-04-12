@@ -19,7 +19,16 @@
         
         <router-link :to="{name: 'principal'}" @click="close"><i className="fas fa-home"></i> Home</router-link>
         <br />
+        <br />
         <router-link :to="{name: 'add'}" @click="close"><i className="fas fa-pen"></i> Ingresar</router-link>
+        <br />
+        <br />
+        <router-link :to="{name: 'list'}" @click="close"><i className="fas fa-list-ol"></i> Listado</router-link>
+        <br />
+        <br />
+        <router-link :to="{}"  @click="handleSalir"><i className="fas fa-sign-out-alt"></i> Salir</router-link>
+        <br />
+        <br />
         
     </div>
     </div>
@@ -30,12 +39,29 @@
 </template>
 
 <script lang="ts" setup>
+import { useRouter } from 'vue-router';
+import { auth } from '../../../firebase';
+
+
+const router = useRouter();
 
 const close = ()=>{
     let closeCanvas = document.querySelector('[data-bs-dismiss="offcanvas"]') as HTMLButtonElement;
     closeCanvas.click();
     
 }
+
+const handleSalir = async ()=>{
+        await auth.signOut();
+        
+        console.log('saliendo...');
+
+        router.push({name: 'login'});
+        
+        
+        
+
+    }
 
 
 </script>
