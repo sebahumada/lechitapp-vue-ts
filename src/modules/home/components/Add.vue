@@ -13,7 +13,7 @@ import 'sweetalert2/dist/sweetalert2.css';
 import dayjs from 'dayjs';
 import { Formulario } from '../../../interfaces/interfaces';
 import Form from './form/Form.vue';
-import { insertRegister } from '../../../firebase/querys';
+import { insertRegister, validateRegister } from '../../../firebase/querys';
 
 const router = useRouter();
 
@@ -30,6 +30,12 @@ const tipo ='Ingresar';
 
 
 const ingresar = async(props:Formulario)=>{
+
+
+    if(!validateRegister(props)) {
+        Swal.fire('Registro incompleto','','error');
+        return;
+    }
 
     Swal.fire({
         title:'Espere',

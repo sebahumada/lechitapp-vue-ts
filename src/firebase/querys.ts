@@ -25,6 +25,22 @@ export const getLastRegister = async():Promise<Register>=>{
     return result;
 }
 
+export const validateRegister = (register:Formulario):boolean =>{
+
+    
+
+    if(register.cantidad<=0) return false;
+
+    if(!register.fecha) return false;
+
+    if(!register.hora) return false;
+
+    if(!register.tipo) return false;
+
+    return true;
+
+}
+
 
 export const insertRegister = async(register:Formulario):Promise<boolean> =>{
 

@@ -14,7 +14,7 @@ import { onBeforeMount } from 'vue';
 
 <script lang="ts" setup>
 import { onBeforeMount, ref } from 'vue';
-import { getRegisterById, editRegister } from '../../../firebase/querys';
+import { getRegisterById, editRegister, validateRegister } from '../../../firebase/querys';
 import { Formulario } from '../../../interfaces/interfaces';
 import { useRegisterStore } from '../../../store/registerStore';
 import Form from './form/Form.vue';
@@ -53,9 +53,10 @@ onBeforeMount(async()=>{
 
 const editar = async(props:Formulario)=>{
     
-    console.log('==== EMIT EDIT ====');
-    
-    console.log(props);
+    if(!validateRegister(props)) {
+        Swal.fire('Registro incompleto','','error');
+        return;
+    }
 
     Swal.fire({
         title:'Espere',
