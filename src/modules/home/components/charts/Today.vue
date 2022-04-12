@@ -7,7 +7,7 @@
     :chart-id="chartId"
     :dataset-id-key="datasetIdKey"
     :width="400"
-    :height="100"
+    :height="150"
   />
 
 </template>
