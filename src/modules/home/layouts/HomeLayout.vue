@@ -12,7 +12,7 @@
     </span>
     <div class="offcanvas offcanvas-start bg-success text-white" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel" >
     <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasExampleLabel">LechitApp</h5>
+        <h5 class="offcanvas-title" id="offcanvasExampleLabel">MENÚ</h5>
         <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body">
@@ -33,8 +33,11 @@
     </div>
     </div>
 
-</div>  
-    <router-view></router-view>
+</div>
+    <div id="contenido">
+        <router-view></router-view>
+
+    </div>
 
 </template>
 
@@ -85,6 +88,13 @@ a{
     color:#ffffff;
     text-decoration: none;
 }
+
+
+#contenido, .offcanvas-body, .offcanvas-header{
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+}
+
+
 
 </style>
 
