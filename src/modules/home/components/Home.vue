@@ -75,7 +75,7 @@ const lastRegister=ref<Register>();
 const isReady = ref<boolean>(false);
 const todayCount = ref<number[]>([]);
 const yesterdayCount = ref<number[]>([]);
-const minutesNextRegister = 200;//!nocturno? 140: 180;
+const minutesNextRegister = 210;//!nocturno? 140: 180;
 const dateNextRegister = ref<string>('');
 
 const lastDate = ref<string>('');
