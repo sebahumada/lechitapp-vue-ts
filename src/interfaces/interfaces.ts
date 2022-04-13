@@ -33,3 +33,8 @@ export interface CountDown {
     minutos:number;
 
 }
+
+export interface WeekRegister {
+    fecha:string;
+    cantidad:number;
+}

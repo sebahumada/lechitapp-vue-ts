@@ -29,6 +29,12 @@ export default {
             component: ()=> import('../views/ListView.vue')           
 
         },
+        {
+            path:'/statistics',
+            name:'statistics',
+            component: ()=> import('../views/StatisticsView.vue')           
+
+        },
     ]
 
 

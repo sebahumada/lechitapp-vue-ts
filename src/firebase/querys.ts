@@ -1,7 +1,9 @@
 import { collection, query, orderBy as ordby, limit, getDocs, where, addDoc, doc, getDoc, updateDoc, deleteDoc } from "@firebase/firestore";
-import { orderBy, sumBy } from "lodash";
+import dayjs from "dayjs";
+import { groupBy, orderBy, sumBy } from "lodash";
 import { db } from ".";
-import { Register, Formulario } from '../interfaces/interfaces';
+import { Register, Formulario, WeekRegister } from '../interfaces/interfaces';
+
 
 
 
@@ -38,6 +40,51 @@ export const validateRegister = (register:Formulario):boolean =>{
     if(!register.tipo) return false;
 
     return true;
+
+}
+
+export const getLastWeekRegisters = async():Promise<WeekRegister[]>=>{
+
+    let registers:WeekRegister[]=[];
+
+    let fechas = [];
+    for(let i=0;i<=6;i++){
+        let aux = i *-1;
+        fechas.push(dayjs().add(aux,'day').format('YYYY-MM-DD'))
+    }
+
+    const lecheCollectionRef = collection(db,'gaspiLeche');
+                
+    const q = query(lecheCollectionRef, where('fecha','in',fechas));
+    
+    const data = await getDocs(q);
+
+    const resultado = data.docs.map( (doc) => ({ fecha: doc.get('fecha'), cantidad: doc.get('cantidad')})) as WeekRegister[];
+    
+    if(resultado && resultado.length>0){
+
+        const arrPorFecha = groupBy(resultado,'fecha');
+        const arrFinal:WeekRegister[] = []
+
+        for(const property in arrPorFecha){
+
+            const arr = arrPorFecha[property];
+            const obj = {
+                fecha: property,
+                cantidad: sumBy(arr,'cantidad')
+            }
+            arrFinal.push(obj);
+
+            
+        }
+        let arrAux = orderBy (arrFinal,['fecha'],['asc']);
+
+        registers = arrAux;
+
+    }
+
+
+    return registers;
 
 }
 

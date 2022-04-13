@@ -11,10 +11,10 @@
                     </div>
                     <div class="card-body">
                         <template v-if="minutes >= 0">
-                            <h4 class="card-title">{{ message }}</h4>
+                            <h4 class="card-title"><strong>{{ message }}</strong></h4>
                         </template>
                         <template v-else>
-                            <h2 class="card-title">{{ message }}</h2>
+                            <h2 class="card-title"><strong>{{ message }}</strong></h2>
                         </template>
                         <p class="card-text">{{ dateNextRegister }}</p>
 
@@ -29,7 +29,7 @@
                         <i class="fas fa-history"></i> Última Leche
                     </div>
                     <div class="card-body">
-                        <h5 class="card-title">{{ lastDate }}</h5>
+                        <h5 class="card-title"><strong>{{ lastDate }}</strong></h5>
 
                         <p class="card-text">{{ lastRegister?.cantidad }} ml</p>
                         <p class="card-text">{{ lastRegister?.tipo }}</p>
@@ -43,7 +43,7 @@
                         <i class="fas fa-plus"></i> Cantidad hoy
                     </div>
                     <div class="card-body">
-                        <h5 class="card-title">{{ todayCount[1] }} ml.</h5>
+                        <h5 class="card-title"><strong>{{ todayCount[1] }} ml.</strong></h5>
                         <p class="card-text">{{ todayCount[0] }} mamaderas</p>
                         <p class="card-text"></p>
                     </div>
@@ -56,7 +56,7 @@
                         <i class="fas fa-calculator"></i> Comparación ayer
                     </div>
                     <div class="card-body">
-                        <h5 class="card-title">{{ todayCount[1] - yesterdayCount[1] }} ml.</h5>
+                        <h5 class="card-title"><strong>{{ todayCount[1] - yesterdayCount[1] }} ml.</strong></h5>
                         <p
                             class="card-text"
                         >{{ (todayCount[0] - yesterdayCount[0]) }} mamaderas que ayer</p>

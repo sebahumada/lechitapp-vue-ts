@@ -53,10 +53,6 @@ const props = defineProps<{
   formEntry:Formulario
 }>()
 
-console.log('PROPS FORM');
-console.log(props);
-
-
 
 const emit = defineEmits(['submitForm'])
 const form = ref<Formulario>({

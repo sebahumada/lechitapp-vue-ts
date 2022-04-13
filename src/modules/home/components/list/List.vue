@@ -1,7 +1,7 @@
 <template>
     <h1>Listado</h1>
 
-    <div class='clearfix'>
+    <div class='clearfix pb-4'>
                     <span class='h4 float-start'>Seleccione Fecha </span>    
                     <input type="date" name="fechaQ" v-model="dateQuery" :max="today" class="form-control float-end" />
                 </div>

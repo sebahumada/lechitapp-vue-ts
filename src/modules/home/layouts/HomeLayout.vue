@@ -2,33 +2,41 @@
    
 
 <div class="sticky">
-    <button class="btn btn-outline-black btn-lg" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+    <button class="btn btn-outline-black btn-lg float-start mt-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
     <i class="fas fa-bars"></i> 
     </button>
-    <span class="text-center ms-1">
+    <!-- <span class="text-center ms-1">
         
         <img src="../../../assets/lechitapp.png" alt="bebe" class="img-responsive imgBebe" >
         
-    </span>
+        
+    </span> -->
+    <p class="text-center align-content-center"><img src="../../../assets/lechitapp.png" alt="bebe" class="img-responsive imgBebe" ></p>
     <div class="offcanvas offcanvas-start bg-success text-white" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel" >
     <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasExampleLabel">MENÚ</h5>
+        <h5 class="offcanvas-title" id="offcanvasExampleLabel"><strong>MENÚ</strong></h5>
         <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body">
+        <div class="menu-offcanvas">
+            <router-link :to="{name: 'principal'}" @click="close"><i className="fas fa-home"></i> Home</router-link>
+            <br />
+            <br />
+            <router-link :to="{name: 'add'}" @click="close"><i className="fas fa-pen"></i> Ingresar</router-link>
+            <br />
+            <br />
+            <router-link :to="{name: 'list'}" @click="close"><i className="fas fa-list-ol"></i> Listado</router-link>
+            <br />
+            <br />
+            <router-link :to="{name: 'statistics'}" @click="close"><i className="fas fa-chart-area"></i> Estadísticas</router-link>
+            <br />
+            <br />
+            <router-link :to="{}"  @click="handleSalir"><i className="fas fa-sign-out-alt"></i> Salir</router-link>
+            <br />
+            <br />
+
+        </div>
         
-        <router-link :to="{name: 'principal'}" @click="close"><i className="fas fa-home"></i> Home</router-link>
-        <br />
-        <br />
-        <router-link :to="{name: 'add'}" @click="close"><i className="fas fa-pen"></i> Ingresar</router-link>
-        <br />
-        <br />
-        <router-link :to="{name: 'list'}" @click="close"><i className="fas fa-list-ol"></i> Listado</router-link>
-        <br />
-        <br />
-        <router-link :to="{}"  @click="handleSalir"><i className="fas fa-sign-out-alt"></i> Salir</router-link>
-        <br />
-        <br />
         
     </div>
     </div>
@@ -81,7 +89,7 @@ const handleSalir = async ()=>{
 }
 
 .imgBebe {
-    max-width: 20%;    
+    max-width: 30%;    
 }
 
 a{
@@ -95,6 +103,9 @@ a{
     
 }
 
+.menu-offcanvas{
+    font-weight: bold;
+}
 
 
 </style>
