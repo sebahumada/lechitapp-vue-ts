@@ -23,7 +23,7 @@
                 </div>
             </div>
 
-            <div class="col-sm card-reg-edit" @click="handleLasRegisterEdit(lastRegister?.id)">
+            <div class="col-sm card-reg-edit" @click="handleLasRegisterEdit(lastRegister!.id)">
                 <div class="card text-white bg-primary mb-3">
                     <div class="card-header">
                         <i class="fas fa-history"></i> Última Leche
@@ -143,13 +143,16 @@ setInterval(() => {
     minutes.value = minutos;
 }, 1000);
 
-const handleLasRegisterEdit = (id:string)=>{
-    console.log(id);
+const handleLasRegisterEdit = (id:string | undefined)=>{
+    
+    if(id){
 
-    const registerStore = useRegisterStore();
+        const registerStore = useRegisterStore();
+    
+        registerStore.setId(id);
+        router.push({ name: 'edit' })
+    }
 
-    registerStore.setId(id);
-    router.push({ name: 'edit' })
     
 }
 
