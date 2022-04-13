@@ -2,7 +2,7 @@
    
 
 <div class="sticky">
-    <button class="btn btn-outline-black btn-lg float-start mt-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+    <button class="btn btn-outline-black btn-lg float-start" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
     <i class="fas fa-bars"></i> 
     </button>
     <!-- <span class="text-center ms-1">
