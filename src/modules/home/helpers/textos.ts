@@ -6,7 +6,7 @@ export const diferenciaMamaderas = (dif:number):string=>{
     else if(dif === -1) return '1 mamadera menos que ayer';
 
     else if(dif > 1) return `${dif} mamaderas más que ayer`;
-    else if(dif < -1) return `${dif} mamaderas menos que ayer`;
+    else if(dif < -1) return `${dif*-1} mamaderas menos que ayer`;
 
     else return '';
 

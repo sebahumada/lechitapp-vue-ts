@@ -1,15 +1,15 @@
 <template>
-    <div class="mb-4">
+    <div class="mb-4" v-if="props.registers.length>0">       
         <h3>Hoy</h3>
-
-        <Line
-            :chart-options="chartOptions"
-            :chart-data="chartData"
-            :chart-id="chartId"
-            :dataset-id-key="datasetIdKey"
-            :width="400"
-            :height="150"
-        />
+            <Line
+                :chart-options="chartOptions"
+                :chart-data="chartData"
+                :chart-id="chartId"
+                :dataset-id-key="datasetIdKey"
+                :width="400"
+                :height="150"
+            />
+        
     </div>
 </template>
 

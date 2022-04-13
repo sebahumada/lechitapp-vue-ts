@@ -103,7 +103,20 @@ export const getLastWeekRegisters = async():Promise<WeekRegister[]>=>{
     
     if(resultado && resultado.length>0){
 
+        const hoy = dayjs().format('YYYY-MM-DD');
+        const busca = resultado.find(x=>x.fecha === hoy);
+
+        if(!busca){
+            resultado.push({
+                cantidad:0,
+                fecha: hoy
+            });
+        }
+
         const arrPorFecha = groupBy(resultado,'fecha');
+
+        
+
         const arrFinal:WeekRegister[] = []
 
         for(const property in arrPorFecha){
