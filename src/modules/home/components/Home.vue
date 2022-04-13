@@ -23,7 +23,7 @@
                 </div>
             </div>
 
-            <div class="col-sm">
+            <div class="col-sm card-reg-edit" @click="handleLasRegisterEdit(lastRegister?.id)">
                 <div class="card text-white bg-primary mb-3">
                     <div class="card-header">
                         <i class="fas fa-history"></i> Última Leche
@@ -89,8 +89,10 @@ import { useCuentaAtras } from '../composables/useCuentaAtras';
 import Today from './charts/Today.vue';
 import { convertMinutosaHoras } from '../helpers/fechas';
 import { diferenciaMamaderas } from '../helpers/textos';
+import { useRegisterStore } from '../../../store/registerStore';
+import { useRouter } from 'vue-router';
 
-
+const router = useRouter();
 const lastRegister = ref<Register>();
 const isReady = ref<boolean>(false);
 const todayCount = ref<number[]>([]);
@@ -141,6 +143,15 @@ setInterval(() => {
     minutes.value = minutos;
 }, 1000);
 
+const handleLasRegisterEdit = (id:string)=>{
+    console.log(id);
+
+    const registerStore = useRegisterStore();
+
+    registerStore.setId(id);
+    router.push({ name: 'edit' })
+    
+}
 
 
 
@@ -150,5 +161,9 @@ setInterval(() => {
 <style scoped>
 .card {
     border-radius: 20px;
+}
+
+.card-reg-edit{
+    cursor: pointer;
 }
 </style>

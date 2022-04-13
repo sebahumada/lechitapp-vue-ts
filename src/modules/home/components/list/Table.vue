@@ -9,7 +9,7 @@
         <div class='table-responsive'>
 
 
-            <table class="table table-warning table-striped text-center table-hover">
+            <table class="table table-secondary table-striped text-center table-hover">
                 <thead class="table-borderless">
                     <tr>
                         <th scope="col">#</th>

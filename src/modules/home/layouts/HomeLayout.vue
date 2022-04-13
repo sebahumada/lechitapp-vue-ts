@@ -2,7 +2,7 @@
    
 
 <div class="sticky">
-    <button class="btn btn-outline-black btn-lg float-start" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+    <button class="btn btn-outline-black btn-lg float-start btnMenu" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
     <i class="fas fa-bars"></i> 
     </button>
     <!-- <span class="text-center ms-1">
@@ -11,7 +11,7 @@
         
         
     </span> -->
-    <p class="text-center align-content-center"><img src="../../../assets/lechitapp.png" alt="bebe" class="img-responsive imgBebe" ></p>
+    <p class="text-center align-content-center me-4"><img src="../../../assets/lechitapp.png" alt="bebe" class="img-responsive imgBebe" ></p>
     <div class="offcanvas offcanvas-start bg-success text-white" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel" >
     <div class="offcanvas-header">
         <h5 class="offcanvas-title" id="offcanvasExampleLabel"><strong>MENÚ</strong></h5>
@@ -108,6 +108,11 @@ a{
 
 .menu-offcanvas{
     font-weight: bold;
+}
+
+.btnMenu:focus, .btnMenu:active{
+outline: none !important;
+   box-shadow: none;
 }
 
 

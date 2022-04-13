@@ -20,7 +20,7 @@ export const getConfig = async():Promise<Config>=>{
     if( resultAux && resultAux.length>0){        
         
         result = (resultAux[0] as Config);
-        console.table(result);
+        
     }
 
     return result;
