@@ -59,7 +59,7 @@
                         <h5 class="card-title"><strong>{{ todayCount[1] - yesterdayCount[1] }} ml.</strong></h5>
                         <p
                             class="card-text"
-                        >{{ (todayCount[0] - yesterdayCount[0]) }} mamaderas que ayer</p>
+                        >{{ diferenciaMamaderas(todayCount[0] - yesterdayCount[0]) }}</p>
                         <p class="card-text"></p>
                     </div>
                 </div>
@@ -88,6 +88,7 @@ import dayjs from 'dayjs';
 import { useCuentaAtras } from '../composables/useCuentaAtras';
 import Today from './charts/Today.vue';
 import { convertMinutosaHoras } from '../helpers/fechas';
+import { diferenciaMamaderas } from '../helpers/textos';
 
 
 const lastRegister = ref<Register>();
