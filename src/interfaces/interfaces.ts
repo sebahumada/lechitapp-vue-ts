@@ -38,3 +38,13 @@ export interface WeekRegister {
     fecha:string;
     cantidad:number;
 }
+
+export interface Config{
+    minutosProximaLeche:number;
+    fechaUpdate:string;
+}
+
+export interface ConfigForm{
+    minutosProximaLeche:string;
+    fechaUpdate:string;
+}

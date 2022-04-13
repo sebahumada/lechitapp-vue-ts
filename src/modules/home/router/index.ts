@@ -35,6 +35,12 @@ export default {
             component: ()=> import('../views/StatisticsView.vue')           
 
         },
+        {
+            path:'/config',
+            name:'config',
+            component: ()=> import('../views/ConfigView.vue')           
+
+        },
     ]
 
 

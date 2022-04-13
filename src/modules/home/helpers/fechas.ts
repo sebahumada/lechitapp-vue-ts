@@ -1,5 +1,16 @@
 import dayjs from "dayjs";
 
+
+export const convertMinutosaHoras = (minutos:number):string=>{
+
+    const hora = Math.floor(minutos/60);
+    const min = minutos%60 === 0? '':':30m';
+
+    return `${hora}h${min}`;    
+
+}
+
+
 export const getDiferenciaFecha = (fechaProxima:string):number=>{
 
     

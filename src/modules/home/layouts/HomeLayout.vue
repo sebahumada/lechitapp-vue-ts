@@ -19,19 +19,22 @@
     </div>
     <div class="offcanvas-body">
         <div class="menu-offcanvas">
-            <router-link :to="{name: 'principal'}" @click="close"><i className="fas fa-home"></i> Home</router-link>
+            <router-link :to="{name: 'principal'}" @click="close"><i class="fas fa-home"></i> Home</router-link>
             <br />
             <br />
-            <router-link :to="{name: 'add'}" @click="close"><i className="fas fa-pen"></i> Ingresar</router-link>
+            <router-link :to="{name: 'add'}" @click="close"><i class="fas fa-pen"></i> Ingresar</router-link>
             <br />
             <br />
-            <router-link :to="{name: 'list'}" @click="close"><i className="fas fa-list-ol"></i> Listado</router-link>
+            <router-link :to="{name: 'list'}" @click="close"><i class="fas fa-list-ol"></i> Listado</router-link>
             <br />
             <br />
-            <router-link :to="{name: 'statistics'}" @click="close"><i className="fas fa-chart-area"></i> Estadísticas</router-link>
+            <router-link :to="{name: 'statistics'}" @click="close"><i class="fas fa-chart-area"></i> Estadísticas</router-link>
             <br />
             <br />
-            <router-link :to="{}"  @click="handleSalir"><i className="fas fa-sign-out-alt"></i> Salir</router-link>
+            <router-link :to="{name: 'config'}" @click="close"><i class="fas fa-cog"></i> Configuración</router-link>
+            <br />
+            <br />
+            <router-link :to="{}"  @click="handleSalir"><i class="fas fa-sign-out-alt"></i> Salir</router-link>
             <br />
             <br />
 

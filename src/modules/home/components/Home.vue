@@ -18,7 +18,7 @@
                         </template>
                         <p class="card-text">{{ dateNextRegister }}</p>
 
-                        <p class="card-text"></p>
+                        <p class="card-text">(cada {{convertMinutosaHoras(minutesNextRegister)}})</p>
                     </div>
                 </div>
             </div>
@@ -81,19 +81,20 @@
 
 
 <script lang="ts" setup>
-import { getLastRegister, getDayCount, getDayRegisters } from '../../../firebase/querys';
+import { getLastRegister, getDayCount, getDayRegisters, getConfig } from '../../../firebase/querys';
 import { onBeforeMount, ref } from 'vue';
 import { Register } from '../../../interfaces/interfaces';
 import dayjs from 'dayjs';
 import { useCuentaAtras } from '../composables/useCuentaAtras';
 import Today from './charts/Today.vue';
+import { convertMinutosaHoras } from '../helpers/fechas';
 
 
 const lastRegister = ref<Register>();
 const isReady = ref<boolean>(false);
 const todayCount = ref<number[]>([]);
 const yesterdayCount = ref<number[]>([]);
-const minutesNextRegister = 210;//!nocturno? 140: 180;
+const minutesNextRegister = ref<number>(0);
 const dateNextRegister = ref<string>('');
 
 const lastDate = ref<string>('');
@@ -113,12 +114,16 @@ onBeforeMount(async () => {
     lastRegister.value = await getLastRegister();
     todayCount.value = await getDayCount(today);
     yesterdayCount.value = await getDayCount(yesterday);
-
     todayRegisters.value = await getDayRegisters(today);
+
+    minutesNextRegister.value = await (await getConfig()).minutosProximaLeche;
+    
+    
+
 
     lastDate.value = dayjs(`${lastRegister.value.fecha} ${lastRegister.value.hora}`).format('DD-MM-YYYY HH:mm');
 
-    dateNextRegister.value = dayjs(`${lastRegister.value.fecha} ${lastRegister.value.hora}`).add(minutesNextRegister, 'minutes').format('DD-MM-YYYY HH:mm');
+    dateNextRegister.value = dayjs(`${lastRegister.value.fecha} ${lastRegister.value.hora}`).add(minutesNextRegister.value, 'minutes').format('DD-MM-YYYY HH:mm');
 
     const { mensaje, minutos } = useCuentaAtras(dateNextRegister.value);
 

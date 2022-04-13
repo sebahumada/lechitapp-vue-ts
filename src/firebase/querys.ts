@@ -2,9 +2,49 @@ import { collection, query, orderBy as ordby, limit, getDocs, where, addDoc, doc
 import dayjs from "dayjs";
 import { groupBy, orderBy, sumBy } from "lodash";
 import { db } from ".";
-import { Register, Formulario, WeekRegister } from '../interfaces/interfaces';
+import { Register, Formulario, WeekRegister, Config } from '../interfaces/interfaces';
 
 
+
+export const getConfig = async():Promise<Config>=>{
+
+    let result={} as Config;
+
+    const lecheCollectionRef = collection(db,'gaspiConfig');        
+    const q = query(lecheCollectionRef, limit(1));
+                    
+    const data = await getDocs(q);
+
+    const resultAux = data.docs.map( (doc) => ({ fechaUpdate: doc.get('fechaUpdate'), minutosProximaLeche: doc.get('minutosProximaLeche')  })) as Config[];
+
+    if( resultAux && resultAux.length>0){        
+        
+        result = (resultAux[0] as Config);
+        console.table(result);
+    }
+
+    return result;
+}
+
+export const updateConfig = async(config:Config):Promise<boolean> =>{
+
+    let resp = false;
+
+    try {
+        
+        const docRef = doc(db,'gaspiConfig','Config');
+        await updateDoc(docRef, {
+            ...config
+        });
+
+        resp = true;
+
+    } catch (error) {
+        console.error(error);        
+    }
+
+    return resp;
+}
 
 
 export const getLastRegister = async():Promise<Register>=>{
@@ -16,7 +56,7 @@ export const getLastRegister = async():Promise<Register>=>{
                     
     const data = await getDocs(q);
 
-    const resultAux = data.docs.map( (doc) => ({ id: doc.id, ...doc.data() }));
+    const resultAux = data.docs.map( (doc) => ({ id: doc.id, ...doc.data() })) as Register[];
 
     if( resultAux && resultAux.length>0){
 
