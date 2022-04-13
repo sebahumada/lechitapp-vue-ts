@@ -1,6 +1,6 @@
 <template>
     <div class="mb-4" v-if="props.registers.length>0">       
-        <h3>Hoy</h3>
+        <h3>{{ mensaje? mensaje:'Hoy'}}</h3>
             <Line
                 :chart-options="chartOptions"
                 :chart-data="chartData"
@@ -23,7 +23,8 @@ ChartJS.register(Title, Tooltip, Legend, LineElement, CategoryScale, LinearScale
 
 
 const props = defineProps<{
-    registers: Register[]
+    registers: Register[],
+    mensaje?:string
 }>()
 
 const horas = Array.from(props.registers, x => x.hora);

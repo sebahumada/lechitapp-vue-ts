@@ -7,6 +7,10 @@
                 </div>
     <template v-if="isReady">
         <Table :registers="registers" :date="dateQuery" @deleteRegister="handleDelete($event)" />
+        <div>
+            <Today :registers="registers" mensaje="Gráfico" />
+
+        </div>
     </template>
     <template v-else>
         <div className="spinner-border mt-4" role="status">
@@ -24,6 +28,7 @@ import { Register } from '../../../../interfaces/interfaces';
 import { getDayRegisters, deleteRegister } from '../../../../firebase/querys';
 import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.css';
+import Today from '../charts/Today.vue';
 
 const dateQuery = ref<string>(dayjs().format('YYYY-MM-DD'));
 const today = dayjs().format('YYYY-MM-DD');

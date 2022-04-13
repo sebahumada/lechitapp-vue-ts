@@ -23,10 +23,11 @@
                 </div>
             </div>
 
-            <div class="col-sm card-reg-edit" @click="handleLasRegisterEdit(lastRegister!.id)">
-                <div class="card text-white bg-primary mb-3">
+            <div class="col-sm">
+                <div class="card text-white bg-primary mb-3 card-reg-edit" @click="handleLasRegisterEdit(lastRegister!.id)">
                     <div class="card-header">
                         <i class="fas fa-history"></i> Última Leche
+                        <i class="fas fa-edit float-end"></i>
                     </div>
                     <div class="card-body">
                         <h5 class="card-title"><strong>{{ lastDate }}</strong></h5>
@@ -91,6 +92,8 @@ import { convertMinutosaHoras } from '../helpers/fechas';
 import { diferenciaMamaderas } from '../helpers/textos';
 import { useRegisterStore } from '../../../store/registerStore';
 import { useRouter } from 'vue-router';
+import Swal from 'sweetalert2';
+import 'sweetalert2/dist/sweetalert2.css';
 
 const router = useRouter();
 const lastRegister = ref<Register>();
@@ -147,10 +150,27 @@ const handleLasRegisterEdit = (id:string | undefined)=>{
     
     if(id){
 
-        const registerStore = useRegisterStore();
-    
-        registerStore.setId(id);
-        router.push({ name: 'edit' })
+
+
+        Swal.fire({
+                title: 'Desea editar el registro?',
+                showDenyButton: false,
+                showCancelButton: true,
+                confirmButtonText: 'Si',
+                cancelButtonText:'Cancelar',
+                allowOutsideClick: false
+                
+              }).then((result) => {
+                
+                if (result.isConfirmed) {
+
+                    const registerStore = useRegisterStore();
+                
+                    registerStore.setId(id);
+                    router.push({ name: 'edit' });                    
+                } 
+              });
+
     }
 
     
