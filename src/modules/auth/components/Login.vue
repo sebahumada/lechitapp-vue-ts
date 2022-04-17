@@ -1,8 +1,16 @@
 <template>
-    <div class="container">
+    <div class="container mt-4">
         <template v-if="isReady">
             <template v-if="!isLogged">
-                <button class='btn btn-primary' @click="signInWithGoogle"><i class="fab fa-google"></i> Ingresar con Google</button>
+
+                <p class="text-center align-content-center me-4">
+                    
+                    <img src="../../../assets/lechitapp.png" alt="bebe" class="img-responsive imgBebe" >
+                    <br />
+                    <button class='btn btn-primary' @click="signInWithGoogle"><i class="fab fa-google"></i> Ingresar con Google</button>
+                    
+                    </p>
+
             </template>
             <template v-else>
                 <div className="spinner-border mt-4" role="status">
