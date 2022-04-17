@@ -19,7 +19,7 @@ const router = useRouter();
 
 
 const form:Formulario =  {
-        cantidad: 120,
+        cantidad: 150,
         fecha:dayjs().format('YYYY-MM-DD'),
         hora:dayjs().format('HH:mm'),
         tipo:'Relleno',

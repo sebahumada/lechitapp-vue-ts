@@ -74,9 +74,10 @@
     </template>
 
     <template v-else>
-        <div class="spinner-border mt-4" role="status">
+        <!-- <div class="spinner-border mt-4" role="status">
             <span class="visually-hidden">Loading...</span>
-        </div>
+        </div> -->
+        <HomeFake />
     </template>
 </template>
 
@@ -94,6 +95,9 @@ import { useRegisterStore } from '../../../store/registerStore';
 import { useRouter } from 'vue-router';
 import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.css';
+import HomeFake from './HomeFake.vue';
+
+
 
 const router = useRouter();
 const lastRegister = ref<Register>();
