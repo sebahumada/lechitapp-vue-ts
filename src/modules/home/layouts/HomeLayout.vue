@@ -2,7 +2,7 @@
    
 
 <div class="sticky">
-    <button class="btn btn-outline-black btn-lg float-start btnMenu" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+    <button class="btn btn-outline-black btn-lg float-start btnMenu text-success" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
     <i class="fas fa-bars"></i> 
     </button>
     <!-- <span class="text-center ms-1">
@@ -11,7 +11,12 @@
         
         
     </span> -->
-    <p class="text-center align-content-center me-4"><img src="../../../assets/lechitapp.png" alt="bebe" class="img-responsive imgBebe" ></p>
+    <p class="text-center align-content-center me-4">
+        <!-- <img src="../../../assets/lechitapp.png" alt="bebe" class="img-responsive imgBebe" > -->
+        <img src="../../../assets/lechitapp.svg" alt="bebe" class="img-responsive imgBebe" >
+        
+        
+    </p>
     <div class="offcanvas offcanvas-start bg-success text-white" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel" >
     <div class="offcanvas-header">
         <h5 class="offcanvas-title" id="offcanvasExampleLabel"><strong>MENÚ</strong></h5>
@@ -86,14 +91,33 @@ const handleSalir = async ()=>{
     position: sticky;
     top: 0;
     z-index: 1;    
-    background-color: #ffffff;
-    border-color: #ffffff;
+    background-color: #F8FAEF;
+    border-color: #F8FAEF;
     margin-left: -10px;
 }
 
-.imgBebe {
-    max-width: 30%;    
+
+
+
+@media only screen and (min-width: 768px) {
+    .imgBebe {
+    max-width: 15%;
+    padding-top: 5px;
+    
+    margin-bottom: 5px;    
+    }
 }
+
+@media only screen and (max-width: 768px) {
+    .imgBebe {
+    max-width: 25%;
+    padding-top: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+
+}
+}
+
 
 a{
     color:#ffffff;

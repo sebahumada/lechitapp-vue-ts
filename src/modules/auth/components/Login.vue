@@ -91,7 +91,7 @@ const signInWithGoogle = ():void=>{
     signInWithPopup(auth,provider)
     .then( ({user}) => {
         
-        console.log(user);
+        // console.log(user);
         isLogged.value = true;
         
         userProfile.value = {
