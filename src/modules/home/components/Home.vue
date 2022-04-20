@@ -1,7 +1,7 @@
 
 <template>
     <template v-if="isReady">
-        <h1>Resumen</h1>
+        <h1>Resumen <span class="float-end h5 text-dark link-click" @click="handleReload"><i class="fas fa-sync "></i></span></h1>
         <hr />
         <div class="row align-items-start align-content-center">
             <div class="col-sm">
@@ -18,13 +18,13 @@
                         </template>
                         <p class="card-text">{{ dateNextRegister }}</p>
 
-                        <p class="card-text">(cada {{convertMinutosaHoras(minutesNextRegister)}})</p>
+                        <p class="card-text link-click" @click="handleEditConfig"><i class="fas fa-cog"></i> (cada {{convertMinutosaHoras(minutesNextRegister)}})</p>
                     </div>
                 </div>
             </div>
 
             <div class="col-sm">
-                <div class="card text-white bg-primary mb-3 card-reg-edit" @click="handleLasRegisterEdit(lastRegister!.id)">
+                <div class="card text-white bg-primary mb-3 link-click" @click="handleLasRegisterEdit(lastRegister!.id)">
                     <div class="card-header">
                         <i class="fas fa-history"></i> Última Leche
                         <i class="fas fa-edit float-end"></i>
@@ -116,6 +116,11 @@ const todayRegisters = ref<Register[]>([]);
 
 
 onBeforeMount(async () => {
+    await loadData();
+});
+
+
+const loadData =async()=>{
     isReady.value = false;
 
     const today = dayjs().format('YYYY-MM-DD');
@@ -141,7 +146,7 @@ onBeforeMount(async () => {
     minutes.value = minutos;
 
     isReady.value = true;
-});
+}
 
 setInterval(() => {
     const { mensaje, minutos } = useCuentaAtras(dateNextRegister.value);
@@ -149,6 +154,14 @@ setInterval(() => {
     message.value = mensaje;
     minutes.value = minutos;
 }, 1000);
+
+const handleEditConfig = () => {
+router.push({ name: 'config' }); 
+}
+
+const handleReload = async()=>{
+    await loadData();
+}
 
 const handleLasRegisterEdit = (id:string | undefined)=>{
     
@@ -190,7 +203,7 @@ const handleLasRegisterEdit = (id:string | undefined)=>{
     border-radius: 20px;
 }
 
-.card-reg-edit{
+.link-click{
     cursor: pointer;
 }
 </style>
