@@ -38,7 +38,7 @@
       <input type="time" name="hora" id="flHora" v-model="form.hora" class="form-control" />
       <label for="flHora">Ingresa Hora</label>
     </div>
-
+    
     <button type="submit" class="btn btn-success mt-2">
       <i class="fas fa-save"></i>
       {{ tipo }}
@@ -63,6 +63,7 @@ const props = defineProps<{
   tipo: string
   formEntry: Formulario
 }>()
+
 
 
 const emit = defineEmits(['submitForm'])

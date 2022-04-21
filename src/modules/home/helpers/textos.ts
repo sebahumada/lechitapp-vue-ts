@@ -11,3 +11,13 @@ export const diferenciaMamaderas = (dif:number):string=>{
     else return '';
 
 }
+
+export const diferenciaMl = (dif:number):string=>{
+
+    if(dif === 0) return 'Sin diferencia';    
+    else if(dif > 0) return `${dif} ml. más que ayer`;
+    else if(dif < 0) return `${dif*-1} ml. menos que ayer`;
+
+    else return '';
+
+}

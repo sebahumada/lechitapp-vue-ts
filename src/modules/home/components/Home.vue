@@ -3,7 +3,9 @@
     <template v-if="isReady">
         <h1>Resumen <span class="float-end h5 text-dark link-click" @click="handleReload"><i class="fas fa-sync "></i></span></h1>
         <hr />
+
         <div class="row align-items-start align-content-center">
+
             <div class="col-sm">
                 <div class="card text-white bg-danger mb-3">
                     <div class="card-header">
@@ -11,10 +13,10 @@
                     </div>
                     <div class="card-body">
                         <template v-if="minutes >= 0">
-                            <h4 class="card-title"><strong>{{ message }}</strong></h4>
+                            <h5 class="card-title"><strong>{{ message }}</strong></h5>
                         </template>
                         <template v-else>
-                            <h2 class="card-title"><strong>{{ message }}</strong></h2>
+                            <h3 class="card-title"><strong>{{ message }}</strong></h3>
                         </template>
                         <p class="card-text">{{ dateNextRegister }}</p>
 
@@ -46,7 +48,7 @@
                     <div class="card-body">
                         <h5 class="card-title"><strong>{{ todayCount[1] }} ml.</strong></h5>
                         <p class="card-text">{{ todayCount[0] }} mamaderas</p>
-                        <p class="card-text"></p>
+                        <p class="card-text"><br /></p>
                     </div>
                 </div>
             </div>
@@ -57,14 +59,17 @@
                         <i class="fas fa-calculator"></i> Comparación ayer
                     </div>
                     <div class="card-body">
-                        <h5 class="card-title"><strong>{{ todayCount[1] - yesterdayCount[1] }} ml.</strong></h5>
+                        <h5 class="card-title"><strong>{{ diferenciaMl(todayCount[1] - yesterdayCount[1]) }}</strong></h5>
                         <p
                             class="card-text"
                         >{{ diferenciaMamaderas(todayCount[0] - yesterdayCount[0]) }}</p>
-                        <p class="card-text"></p>
+                        <p class="card-text"><br /></p>
                     </div>
                 </div>
             </div>
+
+
+
         </div>
 
         <div>
@@ -90,7 +95,7 @@ import dayjs from 'dayjs';
 import { useCuentaAtras } from '../composables/useCuentaAtras';
 import Today from './charts/Today.vue';
 import { convertMinutosaHoras } from '../helpers/fechas';
-import { diferenciaMamaderas } from '../helpers/textos';
+import { diferenciaMamaderas, diferenciaMl } from '../helpers/textos';
 import { useRegisterStore } from '../../../store/registerStore';
 import { useRouter } from 'vue-router';
 import Swal from 'sweetalert2';
@@ -100,18 +105,16 @@ import HomeFake from './HomeFake.vue';
 
 
 const router = useRouter();
+
 const lastRegister = ref<Register>();
 const isReady = ref<boolean>(false);
 const todayCount = ref<number[]>([]);
 const yesterdayCount = ref<number[]>([]);
 const minutesNextRegister = ref<number>(0);
 const dateNextRegister = ref<string>('');
-
 const lastDate = ref<string>('');
-
 const message = ref<string>('');
 const minutes = ref<number>(0);
-
 const todayRegisters = ref<Register[]>([]);
 
 
@@ -192,6 +195,7 @@ const handleLasRegisterEdit = (id:string | undefined)=>{
 
     
 }
+
 
 
 
