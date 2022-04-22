@@ -5,9 +5,11 @@
 
                 <p class="text-center align-content-center me-4">
                     
-                    <img src="../../../assets/lechitapp.png" alt="bebe" class="img-responsive imgBebe" >
-                    <br />
-                    <button class='btn btn-primary' @click="signInWithGoogle"><i class="fab fa-google"></i> Ingresar con Google</button>
+                    <img src="../../../assets/lechitapp.svg" alt="bebe" class="img-responsive imgBebe" >
+                    <div class="mt-5">
+                        <button class='btn btn-success text-light' @click="signInWithGoogle"><i class="fab fa-google"></i> Ingresar con Google</button>
+
+                    </div>
                     
                     </p>
 

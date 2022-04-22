@@ -203,7 +203,7 @@ const handleLasRegisterEdit = (id:string | undefined)=>{
 </script>
 
 <style scoped>
-.card {
+.card, .card-header {
     border-radius: 20px;
 }
 

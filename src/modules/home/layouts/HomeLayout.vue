@@ -20,29 +20,19 @@
     <div class="offcanvas offcanvas-start bg-success text-white" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel" >
     <div class="offcanvas-header">
         <h5 class="offcanvas-title" id="offcanvasExampleLabel"><strong>MENÚ</strong></h5>
-        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        <button type="button" class="btn-close btn-close-white text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body">
         <div class="menu-offcanvas">
-            <router-link :to="{name: 'principal'}" @click="close"><i class="fas fa-home"></i> Home</router-link>
-            <br />
-            <br />
-            <router-link :to="{name: 'add'}" @click="close"><i class="fas fa-pen"></i> Ingresar</router-link>
-            <br />
-            <br />
-            <router-link :to="{name: 'list'}" @click="close"><i class="fas fa-list-ol"></i> Listado</router-link>
-            <br />
-            <br />
-            <router-link :to="{name: 'statistics'}" @click="close"><i class="fas fa-chart-area"></i> Estadísticas</router-link>
-            <br />
-            <br />
-            <router-link :to="{name: 'config'}" @click="close"><i class="fas fa-cog"></i> Configuración</router-link>
-            <br />
-            <br />
-            <router-link :to="{}"  @click="handleSalir"><i class="fas fa-sign-out-alt"></i> Salir</router-link>
-            <br />
-            <br />
 
+            <div v-for="item in menuItems" class="mb-3">
+                <template v-if="item.to">
+                    <router-link :to="{name: item.to}" @click="close"><i :class="item.icon"></i> {{ item.text }}</router-link>                
+                </template>
+                <template v-else>
+                    <router-link :to="{}" @click="handleSalir"><i :class="item.icon"></i> {{ item.text }}</router-link>
+                </template>                
+            </div>
         </div>
         
         
@@ -60,6 +50,10 @@
 <script lang="ts" setup>
 import { useRouter } from 'vue-router';
 import { auth } from '../../../firebase';
+import { menuItems } from '../helpers/menu';
+
+
+
 
 
 const router = useRouter();

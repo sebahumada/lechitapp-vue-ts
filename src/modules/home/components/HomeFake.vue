@@ -69,7 +69,7 @@
 <style scoped>
 
 
-.card {
+.card, .card-header {
     border-radius: 20px;
     
 }
