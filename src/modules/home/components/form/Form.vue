@@ -1,7 +1,7 @@
 <template>
   <form @submit.prevent="handleSubmit">
     <div class="form-floating mb-3">
-      <select name="tipo" v-model="form.tipo" value id="flTipo" class="form-select">
+      <select name="tipo" v-model="form.tipo" value id="flTipo" class="form-select" :class="ui.darkMode?'bg-black text-info':''">
         <option value="Relleno">Relleno</option>
         <option value="Materna">Materna</option>
       </select>
@@ -17,6 +17,7 @@
         min="0"
         max="999"
         class="form-control"
+        :class="ui.darkMode?'bg-black text-info':''"
       />
       <label for="flCantidad">Ingresa Cantidad (ml)</label>
     </div>
@@ -30,16 +31,17 @@
         :min="semana"
         :max="hoy"
         class="form-control"
+        :class="ui.darkMode?'bg-black text-info':''"
       />
       <label for="flFecha">Ingresa Fecha</label>
     </div>
 
     <div class="form-floating mb-3">
-      <input type="time" name="hora" id="flHora" v-model="form.hora" class="form-control" />
+      <input type="time" name="hora" id="flHora" v-model="form.hora" class="form-control" :class="ui.darkMode?'bg-black text-info':''"/>
       <label for="flHora">Ingresa Hora</label>
     </div>
     
-    <button type="submit" class="btn btn-success mt-2">
+    <button type="submit" class="mt-2 btn" :class="ui.darkMode?'btn-outline-success':'btn-success text-info'">
       <i class="fas fa-save"></i>
       {{ tipo }}
     </button>
@@ -51,8 +53,9 @@
 import dayjs from 'dayjs';
 import { ref } from 'vue';
 import { Formulario } from '../../../../interfaces/interfaces';
+import { useUiStore } from '../../../../store/uiStore';
 
-
+const ui = useUiStore();
 
 
 

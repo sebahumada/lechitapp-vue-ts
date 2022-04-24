@@ -3,7 +3,7 @@
         <h1>Configuración</h1>
         <br />
         <div class="table-responsive">
-            <table class="table table-secondary table-striped text-center table-hover">
+            <table class="table text-center" :class="ui.darkMode?'table-dark text-info':'table-secondary table-hover'">
                 <thead class="table-borderless">
                     <tr>
                         <th scope="col">Minutos Próximo Registro</th>
@@ -27,6 +27,7 @@
                     value
                     id="flTipo"
                     class="form-select"
+                    :class="ui.darkMode?'bg-black text-info':''"
                 >
                     <option value="180">180 min. (3h)</option>
                     <option value="210">210 min. (3h:30m)</option>
@@ -35,7 +36,7 @@
                 <label for="flTipo">Selecciona minutos</label>
             </div>
 
-            <button type="submit" class="btn btn-success mt-2">
+            <button type="submit" class="mt-2 btn" :class="ui.darkMode?'btn-outline-success':'btn-success text-info'">
                 <i class="fas fa-save"></i>
                 Editar
             </button>
@@ -57,6 +58,9 @@ import { onBeforeMount, ref } from "vue";
 import { getConfig, updateConfig } from "../../../firebase/querys";
 import { Config, ConfigForm } from "../../../interfaces/interfaces";
 import { useRouter } from "vue-router";
+import { useUiStore } from "../../../store/uiStore";
+
+const ui = useUiStore();
 
 const config = ref<Config>({ fechaUpdate: '', minutosProximaLeche: 0 });
 const configForm = ref<ConfigForm>();

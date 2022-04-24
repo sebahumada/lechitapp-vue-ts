@@ -1,7 +1,8 @@
 
 <template>
     <template v-if="isReady">
-        <h1>Resumen <span class="float-end h5 text-dark link-click" @click="handleReload"><i class="fas fa-sync "></i></span></h1>
+        <h1>Resumen  
+            <span class="float-end h5 link-click" :class="ui.darkMode?'text-info':'text-dark' " @click="handleReload"><i class="fas fa-sync "></i></span></h1>
         <hr />
 
         <div class="row align-items-start align-content-center">
@@ -101,11 +102,12 @@ import { useRouter } from 'vue-router';
 import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.css';
 import HomeFake from './HomeFake.vue';
+import { useUiStore } from '../../../store/uiStore';
 
 
 
 const router = useRouter();
-
+const ui = useUiStore();
 const lastRegister = ref<Register>();
 const isReady = ref<boolean>(false);
 const todayCount = ref<number[]>([]);

@@ -9,7 +9,7 @@
         <div class='table-responsive'>
 
 
-            <table class="table table-secondary table-striped text-center table-hover">
+            <table class="table text-center" :class="ui.darkMode?'table-dark text-info':'table-secondary table-hover'">
                 <thead class="table-borderless">
                     <tr>
                         <th scope="col">#</th>
@@ -64,6 +64,10 @@ import { Register } from '../../../../interfaces/interfaces';
 import dayjs from 'dayjs';
 import { useRegisterStore } from '../../../../store/registerStore';
 import { useRouter } from 'vue-router';
+import { useUiStore } from '../../../../store/uiStore';
+
+
+const ui = useUiStore();
 
 const router = useRouter();
 

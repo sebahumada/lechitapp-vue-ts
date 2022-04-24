@@ -1,5 +1,5 @@
 <template>
-    <div class="container mt-4">
+    <div class="container mt-4" :class="ui.darkMode?'bg-dark text-info':'bg-light text-dark'">
         <template v-if="isReady">
             <template v-if="!isLogged">
 
@@ -7,9 +7,24 @@
                     
                     <img src="../../../assets/lechitapp.svg" alt="bebe" class="img-responsive imgBebe" >
                     <div class="mt-5">
-                        <button class='btn btn-success text-light' @click="signInWithGoogle"><i class="fab fa-google"></i> Ingresar con Google</button>
+                        <button class='btn' :class="ui.darkMode?'btn-outline-success':'btn-success text-light'" @click="signInWithGoogle"><i class="fab fa-google"></i> Ingresar con Google</button>
 
                     </div>
+
+                    <div class="m-3 fixed-bottom">
+               
+                    <template v-if="!ui.darkMode">
+                        <span @click="handleDarkMode" class="text-success"><i class="fas fa-moon"></i> Modo Oscuro</span>
+                        
+
+                    </template>
+                    <template v-else>
+                        <span @click="handleDarkMode" class="text-success"><i class="fas fa-sun"></i> Modo Claro</span>
+                            
+                    </template>
+               
+                
+            </div>
                     
                     </p>
 
@@ -35,13 +50,23 @@ import { GoogleAuthProvider, onAuthStateChanged, signInWithPopup } from '@fireba
 import { onBeforeMount, ref } from 'vue';
 import { auth } from '../../../firebase';
 import { useRouter } from 'vue-router';
+import { useUiStore } from '../../../store/uiStore';
 
 
 
 
+const ui = useUiStore();
 
+const handleDarkMode = ()=>{
+    ui.setDarkMode(!ui.darkMode);
+    if(ui.darkMode){
 
+        document.querySelector('body')!.className ='container bg-dark text-info'
+    } else {
+        document.querySelector('body')!.className ='container bg-light'
 
+    }
+}
 
 onBeforeMount(()=>{
     onAuthStateChanged(auth, user => {
@@ -112,4 +137,12 @@ const signInWithGoogle = ():void=>{
 
 
 </script>
+
+<style scoped>
+
+span{
+    cursor: pointer;
+}
+
+</style>
 

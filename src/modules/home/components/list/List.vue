@@ -3,7 +3,7 @@
 
     <div class='clearfix pb-4'>
                     <span class='h4 float-start'>Seleccione Fecha </span>    
-                    <input type="date" name="fechaQ" v-model="dateQuery" :max="today" class="form-control float-end" />
+                    <input type="date" name="fechaQ" v-model="dateQuery" :max="today" class="form-control float-end" :class="ui.darkMode?'bg-black text-info':''" />
                 </div>
     <template v-if="isReady">
         <Table :registers="registers" :date="dateQuery" @deleteRegister="handleDelete($event)" />
@@ -29,7 +29,10 @@ import { getDayRegisters, deleteRegister } from '../../../../firebase/querys';
 import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.css';
 import Today from '../charts/Today.vue';
+import { useUiStore } from '../../../../store/uiStore';
 
+
+const ui = useUiStore();
 const dateQuery = ref<string>(dayjs().format('YYYY-MM-DD'));
 const today = dayjs().format('YYYY-MM-DD');
 const isReady = ref<boolean>(false);
