@@ -20,7 +20,7 @@
     <div class="offcanvas offcanvas-start bg-success" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel" >
     <div class="offcanvas-header">
         <h5 class="offcanvas-title" id="offcanvasExampleLabel" :class="ui.darkMode?'text-dark':'text-white'"><strong>MENÚ</strong></h5>
-        <button type="button" class="btn-close btn-close-white text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        <button type="button" class="btn-close text-reset" :class="ui.darkMode?'btn-close-dark':'btn-close-white'" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body">
         <div class="menu-offcanvas">
@@ -71,16 +71,15 @@ import { menuItems } from '../helpers/menu';
 
 const ui = useUiStore();
 
-
 const router = useRouter();
 
-const close = ()=>{
+const close = ():void=>{
+    
     let closeCanvas = document.querySelector('[data-bs-dismiss="offcanvas"]') as HTMLButtonElement;
     closeCanvas.click();
-    
 }
 
-const handleDarkMode = ()=>{
+const handleDarkMode = ():void=>{
     ui.setDarkMode(!ui.darkMode);
 
     if(ui.darkMode){
@@ -91,11 +90,10 @@ const handleDarkMode = ()=>{
 
     }
 
-    let closeCanvas = document.querySelector('[data-bs-dismiss="offcanvas"]') as HTMLButtonElement;
-    closeCanvas.click();
+    close();
 }
 
-const handleSalir = async ()=>{
+const handleSalir = async ():Promise<void>=>{
         await auth.signOut();
         
         console.log('saliendo...');

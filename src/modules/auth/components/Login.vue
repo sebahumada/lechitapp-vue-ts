@@ -111,9 +111,7 @@ router.push({ name:'principal' })
 
 const provider = new GoogleAuthProvider();
 
-const signInWithGoogle = ():void=>{
-
-    console.log('Hola Mundo');
+const signInWithGoogle = ():void=>{    
 
     signInWithPopup(auth,provider)
     .then( ({user}) => {
