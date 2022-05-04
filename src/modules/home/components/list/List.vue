@@ -1,10 +1,16 @@
 <template>
     <h1>Listado</h1>
 
-    <div class='clearfix pb-4'>
-                    <span class='h4 float-start'>Seleccione Fecha </span>    
-                    <input type="date" name="fechaQ" v-model="dateQuery" :max="today" class="form-control float-end" :class="ui.darkMode?'bg-black text-info':''" />
-                </div>
+    <div class="form-floating mb-3">
+
+        <input type="date" name="fechaQ" v-model="dateQuery" :max="today" class="form-control float-end"
+            :class="ui.darkMode ? 'bg-black text-info' : ''" />
+        <label for="flFecha">Ingresa Fecha</label>
+
+    </div>
+
+    
+
     <template v-if="isReady">
         <Table :registers="registers" :date="dateQuery" @deleteRegister="handleDelete($event)" />
         <div>
@@ -17,7 +23,7 @@
             <span className="visually-hidden">Loading...</span>
         </div>
     </template>
-    
+
 </template>
 
 <script lang="ts" setup>
@@ -41,41 +47,41 @@ const registers = ref<Register[]>([]);
 const idDelete = ref<string>('');
 
 
-onBeforeMount(async()=>{
+onBeforeMount(async () => {
 
     isReady.value = false;
 
     registers.value = await getDayRegisters(today);
-    
+
     isReady.value = true;
 
 })
 
-const handleDelete = async(id:string)=>{
+const handleDelete = async (id: string) => {
 
     Swal.fire({
-                title: 'Está seguro?',
-                showDenyButton: false,
-                showCancelButton: true,
-                confirmButtonText: 'Si',
-                cancelButtonText:'Cancelar',
-                allowOutsideClick: false
-                
-              }).then((result) => {
-                
-                if (result.isConfirmed) {
+        title: 'Está seguro?',
+        showDenyButton: false,
+        showCancelButton: true,
+        confirmButtonText: 'Si',
+        cancelButtonText: 'Cancelar',
+        allowOutsideClick: false
 
-                    deleteRegister(id).then( (resp)=>{
+    }).then((result) => {
 
-                        if(resp){
-                            Swal.fire('Registro eliminado');
-                            idDelete.value = id;
-                        } else {
-                            Swal.fire('Registro no se pudo eliminar','','error');
-                        }
-                    })
-                } 
-              });
+        if (result.isConfirmed) {
+
+            deleteRegister(id).then((resp) => {
+
+                if (resp) {
+                    Swal.fire('Registro eliminado');
+                    idDelete.value = id;
+                } else {
+                    Swal.fire('Registro no se pudo eliminar', '', 'error');
+                }
+            })
+        }
+    });
 
 
 }
@@ -83,29 +89,29 @@ const handleDelete = async(id:string)=>{
 
 
 
-watch( async()=> dateQuery.value,
-    async(val, prev)=>{        
+watch(async () => dateQuery.value,
+    async (val, prev) => {
         isReady.value = false;
         const dateChange = await val;
-        if(dateChange){
+        if (dateChange) {
 
             registers.value = await getDayRegisters(await val);
-        } else{
+        } else {
             dateQuery.value = await prev;
         }
         isReady.value = true;
     }
 );
 
-watch( async()=> idDelete.value,
-        async(val)=>{
-            isReady.value = false;
-            
-            
-            
-            registers.value = await getDayRegisters(await dateQuery.value);
-            isReady.value = true;
-});
+watch(async () => idDelete.value,
+    async (val) => {
+        isReady.value = false;
+
+
+
+        registers.value = await getDayRegisters(await dateQuery.value);
+        isReady.value = true;
+    });
 
 
 

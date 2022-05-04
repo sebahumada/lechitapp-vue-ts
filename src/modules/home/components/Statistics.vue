@@ -5,6 +5,8 @@
     <template v-if="isReady">
         
         <Week :registers="lastWeekRegisters" />
+        <br />
+        <ListWeek :registers="lastWeekRegisters"/>
     </template>
     <template v-else>
         <div class="spinner-border mt-4" role="status">
@@ -18,6 +20,7 @@ import { onBeforeMount, ref } from 'vue';
 import { getLastWeekRegisters } from '../../../firebase/querys';
 import { WeekRegister } from '../../../interfaces/interfaces';
 import Week from './charts/Week.vue';
+import ListWeek from './list/ListWeek.vue';
 
 const isReady = ref<boolean>(false);
 
