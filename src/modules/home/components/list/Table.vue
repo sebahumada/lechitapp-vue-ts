@@ -16,8 +16,8 @@
                         <th scope="col">Tipo</th>
                         <th scope="col">Cantidad</th>
                         <th scope="col">Hora</th>
-                        <th scope="col"><i class="fas fa-edit"></i></th>
-                        <th scope="col"><i class="fas fa-trash-alt"></i></th>
+                        <th scope="col"><i class="bi bi-pencil-square"></i></th>
+                        <th scope="col"><i class="bi bi-trash"></i></th>
 
 
 
@@ -38,12 +38,12 @@
                         <td>{{ hora }}</td>
                         <td>
 
-                            <i @click="handleEdit(id)" class="fas fa-edit"></i>
+                            <i @click="handleEdit(id)" class="bi bi-pencil-square"></i>
 
                         </td>
                         <td>
 
-                            <i @click="handleDelete(id)" class="fas fa-trash-alt"></i>
+                            <i @click="handleDelete(id)" class="bi bi-trash"></i>
                         </td>
 
                     </tr>

@@ -1,8 +1,10 @@
 
 <template>
     <template v-if="isReady">
-        <h1>Resumen  
-            <span class="float-end h5 link-click" :class="ui.darkMode?'text-info':'text-dark' " @click="handleReload"><i class="fas fa-sync "></i></span></h1>
+        <h1>Resumen
+            <span class="float-end h5 link-click" :class="ui.darkMode ? 'text-info' : 'text-dark'" @click="handleReload"><i
+                    class="bi bi-arrow-repeat"></i></span>
+        </h1>
         <hr />
 
         <div class="row align-items-start align-content-center">
@@ -10,7 +12,7 @@
             <div class="col-sm">
                 <div class="card text-white bg-danger mb-3">
                     <div class="card-header">
-                        <i class="far fa-clock"></i> Próxima Leche
+                        <i class="bi bi-alarm"></i> Próxima Leche
                     </div>
                     <div class="card-body">
                         <template v-if="minutes >= 0">
@@ -21,16 +23,18 @@
                         </template>
                         <p class="card-text">{{ dateNextRegister }}</p>
 
-                        <p class="card-text link-click" @click="handleEditConfig"><i class="fas fa-cog"></i> (cada {{convertMinutosaHoras(minutesNextRegister)}})</p>
+                        <p class="card-text link-click" @click="handleEditConfig"><i class="bi bi-gear-fill"></i> (cada
+                            {{ convertMinutosaHoras(minutesNextRegister) }})</p>
                     </div>
                 </div>
             </div>
 
             <div class="col-sm">
-                <div class="card text-white bg-primary mb-3 link-click" @click="handleLasRegisterEdit(lastRegister!.id)">
+                <div class="card text-white bg-primary mb-3 link-click"
+                    @click="handleLasRegisterEdit(lastRegister!.id)">
                     <div class="card-header">
-                        <i class="fas fa-history"></i> Última Leche
-                        <i class="fas fa-edit float-end"></i>
+                        <i class="bi bi-clock-history"></i> Última Leche
+                        <i class="bi bi-pencil-square float-end"></i>
                     </div>
                     <div class="card-body">
                         <h5 class="card-title"><strong>{{ lastDate }}</strong></h5>
@@ -44,7 +48,7 @@
             <div class="col-sm">
                 <div class="card text-black bg-warning mb-3">
                     <div class="card-header">
-                        <i class="fas fa-plus"></i> Cantidad hoy
+                        <i class="bi bi-plus"></i> Cantidad hoy
                     </div>
                     <div class="card-body">
                         <h5 class="card-title"><strong>{{ todayCount[1] }} ml.</strong></h5>
@@ -57,13 +61,12 @@
             <div class="col-sm">
                 <div class="card text-white bg-success mb-3">
                     <div class="card-header">
-                        <i class="fas fa-calculator"></i> Comparación ayer
+                        <i class="bi bi-calculator"></i> Comparación ayer
                     </div>
                     <div class="card-body">
-                        <h5 class="card-title"><strong>{{ diferenciaMl(todayCount[1] - yesterdayCount[1]) }}</strong></h5>
-                        <p
-                            class="card-text"
-                        >{{ diferenciaMamaderas(todayCount[0] - yesterdayCount[0]) }}</p>
+                        <h5 class="card-title"><strong>{{ diferenciaMl(todayCount[1] - yesterdayCount[1]) }}</strong>
+                        </h5>
+                        <p class="card-text">{{ diferenciaMamaderas(todayCount[0] - yesterdayCount[0]) }}</p>
                         <p class="card-text"><br /></p>
                     </div>
                 </div>
@@ -125,7 +128,7 @@ onBeforeMount(async () => {
 });
 
 
-const loadData =async()=>{
+const loadData = async () => {
     isReady.value = false;
 
     const today = dayjs().format('YYYY-MM-DD');
@@ -137,8 +140,8 @@ const loadData =async()=>{
     todayRegisters.value = await getDayRegisters(today);
 
     minutesNextRegister.value = await (await getConfig()).minutosProximaLeche;
-    
-    
+
+
 
 
     lastDate.value = dayjs(`${lastRegister.value.fecha} ${lastRegister.value.hora}`).format('DD-MM-YYYY HH:mm');
@@ -155,47 +158,46 @@ const loadData =async()=>{
 
 setInterval(() => {
     const { mensaje, minutos } = useCuentaAtras(dateNextRegister.value);
-
     message.value = mensaje;
     minutes.value = minutos;
 }, 1000);
 
 const handleEditConfig = () => {
-router.push({ name: 'config' }); 
+    router.push({ name: 'config' });
 }
 
-const handleReload = async()=>{
+const handleReload = async () => {
     await loadData();
 }
 
-const handleLasRegisterEdit = (id:string | undefined)=>{
-    
-    if(id){
+const handleLasRegisterEdit = (id: string | undefined) => {
+
+    if (id) {
 
 
 
         Swal.fire({
-                title: 'Desea editar el registro?',
-                showDenyButton: false,
-                showCancelButton: true,
-                confirmButtonText: 'Si',
-                cancelButtonText:'Cancelar',
-                allowOutsideClick: false
-                
-              }).then((result) => {
-                
-                if (result.isConfirmed) {
+            title: 'Desea editar el registro?',
+            showDenyButton: false,
+            showCancelButton: true,
+            confirmButtonText: 'Si',
+            cancelButtonText: 'Cancelar',
+            allowOutsideClick: false
 
-                    const registerStore = useRegisterStore();
-                
-                    registerStore.setId(id);
-                    router.push({ name: 'edit' });                    
-                } 
-              });
+        }).then((result) => {
+
+            if (result.isConfirmed) {
+
+                const registerStore = useRegisterStore();
+
+                registerStore.setId(id);
+                router.push({ name: 'edit' });
+            }
+        });
 
     }
 
-    
+
 }
 
 
@@ -205,11 +207,12 @@ const handleLasRegisterEdit = (id:string | undefined)=>{
 </script>
 
 <style scoped>
-.card, .card-header {
+.card,
+.card-header {
     border-radius: 20px;
 }
 
-.link-click{
+.link-click {
     cursor: pointer;
 }
 </style>

@@ -37,7 +37,7 @@
             </div>
 
             <button type="submit" class="mt-2 btn" :class="ui.darkMode?'btn-outline-success':'btn-success text-info'">
-                <i class="fas fa-save"></i>
+                <i class="bi bi-save"></i>
                 Editar
             </button>
         </form>

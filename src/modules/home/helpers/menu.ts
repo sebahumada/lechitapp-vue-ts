@@ -1,37 +1,37 @@
 export const menuItems = [
     {
         to: 'principal',
-        icon: 'fas fa-home',
+        icon: 'bi bi-house-fill',
         text: 'Home',
         click: 'close'
     },
     {
         to: 'add',
-        icon: 'fas fa-pen',
+        icon: 'bi bi-pencil-fill',
         text: 'Ingresar',
         click: 'close'
     },
     {
         to: 'list',
-        icon: 'fas fa-list-ol',
+        icon: 'bi bi-list-ol',
         text: 'Listado',
         click: 'close'
     },
     {
         to: 'statistics',
-        icon: 'fas fa-chart-area',
+        icon: 'bi bi-graph-up',
         text: 'Estadísticas',
         click: 'close'
     },
     {
         to: 'config',
-        icon: 'fas fa-cog',
+        icon: 'bi bi-gear-fill',
         text: 'Configuración',
         click: 'close'
     },
     {
         to: '',
-        icon: 'fas fa-sign-out-alt',
+        icon: 'bi bi-box-arrow-left',
         text: 'Salir',
         click: 'handleSalir'
     },
