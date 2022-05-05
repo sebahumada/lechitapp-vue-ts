@@ -12,7 +12,7 @@
             <!-- <p class="text-center align-content-center me-4"> -->
 
             <img src="../../../assets/lechitapp.svg" alt="bebe" class="img-responsive imgBebe">
-            <span class="float-end align-content-center mt-3 badge bg-success">{{ dateTimeNow }}</span>
+            <span class="float-end align-content-center mt-3 badge" :class="ui.darkMode ? 'bg-black text-success' : 'bg-success text-info'">{{ dateTimeNow }}</span>
         </p>
 
 
