@@ -91,7 +91,8 @@ setInterval(() => {
 }, 1000);
 
 const close = (): void => {
-
+    console.log('cerrar');
+    
     let closeCanvas = document.querySelector('[data-bs-dismiss="offcanvas"]') as HTMLButtonElement;
     closeCanvas.click();
 }

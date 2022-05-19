@@ -4,7 +4,8 @@ import App from './App.vue'
 import "bootstrap/dist/js/bootstrap.js";
 import "bootstrap/dist/js/bootstrap.bundle.js";
 import 'bootstrap-icons/font/bootstrap-icons.css';
-import './styles/styles.scss'
+import './styles/styles.scss';
+import 'animate.css';
 import router from './router';
 
 createApp(App)
