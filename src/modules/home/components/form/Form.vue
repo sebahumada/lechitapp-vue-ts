@@ -3,7 +3,7 @@
     <div class="form-floating mb-3">
       <select name="tipo" v-model="form.tipo" value id="flTipo" class="form-select" :class="ui.darkMode?'bg-black text-info':''">
         <option value="Relleno">Relleno</option>
-        <option value="Relleno">Comida</option>
+        <option value="Comida">Comida</option>
         <option value="Materna">Materna</option>
       </select>
       <label for="flTipo">Ingresa Tipo</label>
