@@ -1,5 +1,5 @@
 <template>
-    <h5>Desde <span class="badge bg-success">{{fechas[0]}}</span> al <span class="badge bg-success">{{fechas[6]}}</span></h5>
+    <h5>Desde <span class="badge bg-success">{{fechas[0]}}</span> al <span class="badge bg-success">{{fechas[fechas.length-1]}}</span></h5>
     <br />
     <Line
             :chart-options="chartOptions"

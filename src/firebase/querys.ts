@@ -83,15 +83,16 @@ export const validateRegister = (register:Formulario):boolean =>{
 
 }
 
-export const getLastWeekRegisters = async():Promise<WeekRegister[]>=>{
+export const getLastWeekRegisters = async(semanasAtras:number=0):Promise<WeekRegister[]>=>{
 
     let registers:WeekRegister[]=[];
 
     let fechas = [];
     for(let i=0;i<=6;i++){
-        let aux = i *-1;
+        let aux = i *-1 - 7*semanasAtras;
         fechas.push(dayjs().add(aux,'day').format('YYYY-MM-DD'))
-    }
+    }    
+    
 
     const lecheCollectionRef = collection(db,'gaspiLeche');
                 
@@ -101,17 +102,7 @@ export const getLastWeekRegisters = async():Promise<WeekRegister[]>=>{
 
     const resultado = data.docs.map( (doc) => ({ fecha: doc.get('fecha'), cantidad: doc.get('cantidad')})) as WeekRegister[];
     
-    if(resultado && resultado.length>0){
-
-        const hoy = dayjs().format('YYYY-MM-DD');
-        const busca = resultado.find(x=>x.fecha === hoy);
-
-        if(!busca){
-            resultado.push({
-                cantidad:0,
-                fecha: hoy
-            });
-        }
+    if(resultado && resultado.length>0){        
 
         const arrPorFecha = groupBy(resultado,'fecha');
 
@@ -134,9 +125,27 @@ export const getLastWeekRegisters = async():Promise<WeekRegister[]>=>{
 
         registers = arrAux;
 
+        // for(const fecha in fechas){
+
+        //     const cantidadFecha = arrAux.find(f=>f.fecha===fecha);
+
+        //     const dia:WeekRegister = {
+        //         fecha,
+        //         cantidad: cantidadFecha?cantidadFecha.cantidad:0
+        //     }
+
+        //     registers.push(dia);
+
+
+        // }
+
+
+        
+
     }
 
 
+    // return orderBy (registers,['fecha'],['asc']);
     return registers;
 
 }

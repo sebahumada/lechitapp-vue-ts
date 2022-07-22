@@ -36,6 +36,7 @@ import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.css';
 import Today from '../charts/Today.vue';
 import { useUiStore } from '../../../../store/uiStore';
+import { useRegisterStore } from '../../../../store/registerStore';
 
 
 const ui = useUiStore();
@@ -43,16 +44,19 @@ const dateQuery = ref<string>(dayjs().format('YYYY-MM-DD'));
 const today = dayjs().format('YYYY-MM-DD');
 const isReady = ref<boolean>(false);
 const registers = ref<Register[]>([]);
-
+const registerStore = useRegisterStore();
 const idDelete = ref<string>('');
 
 
 onBeforeMount(async () => {
 
     isReady.value = false;
-
-    registers.value = await getDayRegisters(today);
-
+    
+    let mountDate = registerStore.dateLastRegister.length>0?registerStore.dateLastRegister:today;   
+    dateQuery.value = mountDate;
+    
+    registers.value = await getDayRegisters(mountDate);
+    registerStore.setDateLastRegister('');
     isReady.value = true;
 
 })

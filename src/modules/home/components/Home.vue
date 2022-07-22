@@ -19,7 +19,13 @@
                             <h5 class="card-title"><strong>{{ message }}</strong></h5>
                         </template>
                         <template v-else>
-                            <h3 class="card-title"><strong>{{ message }}</strong></h3>
+                            <h3 class="card-title">
+                                <strong>{{ message }}</strong>
+                            </h3>
+
+                            
+                            <button v-show="minutes<=-30" class="btn btn-success mb-3" @click="handleAddRegisterFast">Agregar rápido?</button>
+                            
                         </template>
                         <p class="card-text">{{ dateNextRegister }}</p>
 
@@ -31,7 +37,7 @@
 
             <div class="col-sm">
                 <div class="card text-white bg-primary mb-3 link-click"
-                    @click="handleLasRegisterEdit(lastRegister!.id)">
+                    @click="handleLastRegisterEdit(lastRegister!.id)">
                     <div class="card-header">
                         <i class="bi bi-clock-history"></i> Última Leche
                         <i class="bi bi-pencil-square float-end"></i>
@@ -46,7 +52,8 @@
             </div>
 
             <div class="col-sm">
-                <div class="card text-black bg-warning mb-3">
+                <div class="card text-black bg-warning mb-3 link-click"
+                    @click="handleGoToList">
                     <div class="card-header">
                         <i class="bi bi-plus"></i> Cantidad hoy
                     </div>
@@ -92,9 +99,9 @@
 
 
 <script lang="ts" setup>
-import { getLastRegister, getDayCount, getDayRegisters, getConfig } from '../../../firebase/querys';
+import { getLastRegister, getDayCount, getDayRegisters, getConfig, insertRegister } from '../../../firebase/querys';
 import { onBeforeMount, ref } from 'vue';
-import { Register } from '../../../interfaces/interfaces';
+import { Register, Formulario } from '../../../interfaces/interfaces';
 import dayjs from 'dayjs';
 import { useCuentaAtras } from '../composables/useCuentaAtras';
 import Today from './charts/Today.vue';
@@ -111,6 +118,7 @@ import { useUiStore } from '../../../store/uiStore';
 
 const router = useRouter();
 const ui = useUiStore();
+const registerStore = useRegisterStore();
 const lastRegister = ref<Register>();
 const isReady = ref<boolean>(false);
 const todayCount = ref<number[]>([]);
@@ -121,6 +129,9 @@ const lastDate = ref<string>('');
 const message = ref<string>('');
 const minutes = ref<number>(0);
 const todayRegisters = ref<Register[]>([]);
+
+const fastRegisterDate = ref<string>('');
+const fastRegisterTime = ref<string>('');
 
 
 onBeforeMount(async () => {
@@ -147,6 +158,9 @@ const loadData = async () => {
     lastDate.value = dayjs(`${lastRegister.value.fecha} ${lastRegister.value.hora}`).format('DD-MM-YYYY HH:mm');
 
     dateNextRegister.value = dayjs(`${lastRegister.value.fecha} ${lastRegister.value.hora}`).add(minutesNextRegister.value, 'minutes').format('DD-MM-YYYY HH:mm');
+    fastRegisterDate.value = dayjs(`${lastRegister.value.fecha} ${lastRegister.value.hora}`).add(minutesNextRegister.value, 'minutes').format('YYYY-MM-DD');
+    fastRegisterTime.value = dayjs(`${lastRegister.value.fecha} ${lastRegister.value.hora}`).add(minutesNextRegister.value, 'minutes').format('HH:mm');
+
 
     const { mensaje, minutos } = useCuentaAtras(dateNextRegister.value);
 
@@ -170,7 +184,56 @@ const handleReload = async () => {
     await loadData();
 }
 
-const handleLasRegisterEdit = (id: string | undefined) => {
+const handleGoToList = ()=>{
+    router.push({ name: 'list'});
+}
+
+
+const handleAddRegisterFast = async()=>{
+
+    const registerForm:Formulario = {
+        cantidad: 150,
+        fecha: fastRegisterDate.value,
+        hora:fastRegisterTime.value,
+        tipo:'Relleno',
+        nocturno: false
+    }
+
+    console.log(registerForm);
+    
+
+    Swal.fire({
+        title:'Espere',
+        showDenyButton: false,
+        showCancelButton: false,
+        allowOutsideClick: false,
+        didOpen: ()=>{
+            Swal.showLoading()
+        }
+    });
+
+    const resp = await insertRegister(registerForm);
+
+    if(resp){
+        Swal.fire({
+                title: 'Registro ingresado correctamente!',
+                showDenyButton: false,
+                showCancelButton: false,
+                confirmButtonText: 'OK',
+                denyButtonText: `Cancelar`,
+                allowOutsideClick: false
+              }).then((result) => {
+                
+                if (result.isConfirmed) {
+                    registerStore.setDateLastRegister(registerForm.fecha);
+                    router.push({ name:'list' })
+                } 
+              });
+    }
+
+}
+
+const handleLastRegisterEdit = (id: string | undefined) => {
 
     if (id) {
 
@@ -186,9 +249,7 @@ const handleLasRegisterEdit = (id: string | undefined) => {
 
         }).then((result) => {
 
-            if (result.isConfirmed) {
-
-                const registerStore = useRegisterStore();
+            if (result.isConfirmed) {                
 
                 registerStore.setId(id);
                 router.push({ name: 'edit' });

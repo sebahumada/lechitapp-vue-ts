@@ -81,6 +81,7 @@ const editar = async(props:Formulario)=>{
               }).then((result) => {
                 
                 if (result.isConfirmed) {
+                    registerStore.setDateLastRegister(props.fecha);
                     router.push({ name:'list' })
                 } 
               });

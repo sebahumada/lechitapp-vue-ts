@@ -2,7 +2,7 @@
 
 
 
-    <h2>Registros fecha <span class="badge bg-primary">{{ dateFormat }}</span></h2>
+    <h2>Registros fecha <span class="badge bg-primary link-click" @click="handleAddRegister">{{ dateFormat }}</span></h2>
     <h3>Total <span class="badge bg-success">{{ sum }} ml</span></h3>
 
     <template v-if="registers.length > 0">
@@ -77,7 +77,7 @@ const props = defineProps<{
     date: string
 }>()
 
-
+const registerStore = useRegisterStore();
 const emit = defineEmits(['deleteRegister'])
 
 const dateFormat = dayjs(props.date).format('DD-MM-YYYY');
@@ -87,12 +87,17 @@ const sum = sumBy(props.registers, 'cantidad');
 const handleEdit = async (id: string): Promise<void> => {
 
 
-    const registerStore = useRegisterStore();
+    
 
     registerStore.setId(id);
-    router.push({ name: 'edit' })
+    router.push({ name: 'edit' });
 
 
+}
+
+const handleAddRegister = ()=>{
+    registerStore.setDateLastRegister(props.date);
+    router.push({name: 'add'});
 }
 
 const handleDelete = (id: string): void => {
@@ -101,3 +106,9 @@ const handleDelete = (id: string): void => {
 }
 
 </script>
+
+<style scoped>
+.link-click {
+    cursor: pointer;
+}
+</style>

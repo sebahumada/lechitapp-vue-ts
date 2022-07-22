@@ -9,6 +9,7 @@
                         <th scope="col">#</th>
                         <th scope="col">Fecha</th>
                         <th scope="col">Cantidad</th>
+                        <th scope="col"><i class="bi bi-pencil-square"></i></th>
                         
 
 
@@ -27,6 +28,9 @@
                         <th>{{ i + 1 }}</th>
                         <td>{{ dayjs(`${fecha}`).format('DD-MM-YYYY') }}</td>
                         <td>{{ cantidad }} ml</td>  
+                        <td>
+                            <i @click="handleEdit(fecha)" class="bi bi-pencil-square"></i>
+                        </td>
                     </tr>
 
                 </tbody>
@@ -43,6 +47,8 @@
 import { WeekRegister } from '../../../../interfaces/interfaces';
 import { useUiStore } from '../../../../store/uiStore';
 import dayjs from 'dayjs';
+import { useRegisterStore } from '../../../../store/registerStore';
+import { useRouter } from 'vue-router';
 
 const ui = useUiStore();
 
@@ -50,5 +56,13 @@ const props = defineProps<{
     registers: WeekRegister[]
     
 }>()
+
+const registerStore = useRegisterStore();
+const router = useRouter();
+
+const handleEdit = (fecha:string)=>{
+    registerStore.setDateLastRegister(fecha);
+    router.push({ name:'list' });
+}
 
 </script>

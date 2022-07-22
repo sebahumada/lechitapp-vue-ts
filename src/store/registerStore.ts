@@ -4,7 +4,8 @@ export const useRegisterStore = defineStore({
   id: 'register',
 
   state: () => ({
-    registerId: ''
+    registerId: '',
+    dateLastRegister: ''
   }),
   getters: {
     
@@ -12,6 +13,9 @@ export const useRegisterStore = defineStore({
   actions: {
     setId(payload:string):void {
       this.registerId = payload;
+    },
+    setDateLastRegister(payload:string):void{
+      this.dateLastRegister = payload;
     }
   }
 })

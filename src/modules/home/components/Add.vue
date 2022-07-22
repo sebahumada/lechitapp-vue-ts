@@ -14,18 +14,21 @@ import dayjs from 'dayjs';
 import { Formulario } from '../../../interfaces/interfaces';
 import Form from './form/Form.vue';
 import { insertRegister, validateRegister } from '../../../firebase/querys';
+import { useRegisterStore } from '../../../store/registerStore';
 
 const router = useRouter();
-
+const registerStore = useRegisterStore();
 
 const form:Formulario =  {
         cantidad: 150,
-        fecha:dayjs().format('YYYY-MM-DD'),
+        fecha:registerStore.dateLastRegister.length>0?registerStore.dateLastRegister:dayjs().format('YYYY-MM-DD'),
         hora:dayjs().format('HH:mm'),
         tipo:'Relleno',
         nocturno: false    
     };
 const tipo ='Ingresar';
+
+registerStore.setDateLastRegister('');
 
 
 
@@ -60,6 +63,7 @@ const ingresar = async(props:Formulario)=>{
               }).then((result) => {
                 
                 if (result.isConfirmed) {
+                    registerStore.setDateLastRegister(props.fecha);
                     router.push({ name:'list' })
                 } 
               });
