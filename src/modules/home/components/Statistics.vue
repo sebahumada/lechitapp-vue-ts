@@ -1,20 +1,21 @@
 <template>
     <h1>Estadísticas</h1>
-    
 
-    <label for="customRange" class="form-label">Semanas Atrás: {{weeksBehind}}</label>
-    <input type="range" v-model="weeksBehind" class="form-range" id="customRange" min="0" max="52" step="1" :class="ui.darkMode?'bg-black text-info':''" />
 
-      
-      
-    
+    <label for="customRange" class="form-label">Semanas Atrás: {{ weeksBehind }}</label>
+    <input type="range" v-model="weeksBehind" class="form-range" id="customRange" min="0" max="52" step="1"
+        :class="ui.darkMode ? 'bg-dark text-info' : ''" />
+
+
+
+
 
     <template v-if="isReady">
-        
-        <template v-if="lastWeekRegisters.length>0">
+
+        <template v-if="lastWeekRegisters.length > 0">
             <Week :registers="lastWeekRegisters" />
             <br />
-            <ListWeek :registers="lastWeekRegisters"/>
+            <ListWeek :registers="lastWeekRegisters" />
 
         </template>
         <template v-else>
@@ -42,11 +43,11 @@ const isReady = ref<boolean>(false);
 const lastWeekRegisters = ref<WeekRegister[]>([]);
 const weeksBehind = ref<number>(0);
 
-onBeforeMount(async()=>{
+onBeforeMount(async () => {
 
     isReady.value = false;
     lastWeekRegisters.value = await getLastWeekRegisters(weeksBehind.value);
-    
+
     isReady.value = true;
 })
 
