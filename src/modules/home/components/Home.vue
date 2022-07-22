@@ -2,8 +2,8 @@
 <template>
     <template v-if="isReady">
         <h1>Resumen
-            <span class="float-end h5 link-click" :class="ui.darkMode ? 'text-info' : 'text-dark'" @click="handleReload"><i
-                    class="bi bi-arrow-repeat"></i></span>
+            <span class="float-end h5 link-click" :class="ui.darkMode ? 'text-info' : 'text-dark'"
+                @click="handleReload"><i class="bi bi-arrow-repeat"></i></span>
         </h1>
         <hr />
 
@@ -23,11 +23,12 @@
                                 <strong>{{ message }}</strong>
                             </h3>
 
-                            
-                            <button v-show="minutes<=-30" class="btn btn-success mb-3" @click="handleAddRegisterFast">Agregar rápido?</button>
-                            
+                            <button v-show="minutes <= -30" class="btn btn-warning mb-3"
+                                @click="handleAddRegisterFast">Agregar rápido?</button>
+
                         </template>
-                        <p class="card-text">{{ dateNextRegister }}</p>
+                        <p class="card-text link-click" @click="handleAddRegister">
+                            {{ dateNextRegister }}</p>
 
                         <p class="card-text link-click" @click="handleEditConfig"><i class="bi bi-gear-fill"></i> (cada
                             {{ convertMinutosaHoras(minutesNextRegister) }})</p>
@@ -52,8 +53,7 @@
             </div>
 
             <div class="col-sm">
-                <div class="card text-black bg-warning mb-3 link-click"
-                    @click="handleGoToList">
+                <div class="card text-black bg-warning mb-3 link-click" @click="handleGoToList">
                     <div class="card-header">
                         <i class="bi bi-plus"></i> Cantidad hoy
                     </div>
@@ -90,9 +90,6 @@
     </template>
 
     <template v-else>
-        <!-- <div class="spinner-border mt-4" role="status">
-            <span class="visually-hidden">Loading...</span>
-        </div> -->
         <HomeFake />
     </template>
 </template>
@@ -184,51 +181,55 @@ const handleReload = async () => {
     await loadData();
 }
 
-const handleGoToList = ()=>{
-    router.push({ name: 'list'});
+const handleGoToList = () => {
+    router.push({ name: 'list' });
 }
 
 
-const handleAddRegisterFast = async()=>{
+const handleAddRegister = () => {
+    router.push({ name: 'add' });
+}
 
-    const registerForm:Formulario = {
+const handleAddRegisterFast = async () => {
+
+    const registerForm: Formulario = {
         cantidad: 150,
         fecha: fastRegisterDate.value,
-        hora:fastRegisterTime.value,
-        tipo:'Relleno',
+        hora: fastRegisterTime.value,
+        tipo: 'Relleno',
         nocturno: false
     }
 
     console.log(registerForm);
-    
+
 
     Swal.fire({
-        title:'Espere',
+        title: 'Espere',
         showDenyButton: false,
         showCancelButton: false,
         allowOutsideClick: false,
-        didOpen: ()=>{
+        didOpen: () => {
             Swal.showLoading()
         }
     });
 
     const resp = await insertRegister(registerForm);
 
-    if(resp){
+    if (resp) {
         Swal.fire({
-                title: 'Registro ingresado correctamente!',
-                showDenyButton: false,
-                showCancelButton: false,
-                confirmButtonText: 'OK',
-                denyButtonText: `Cancelar`,
-                allowOutsideClick: false
-              }).then((result) => {
-                
-                if (result.isConfirmed) {
-                    registerStore.setDateLastRegister(registerForm.fecha);
-                    router.push({ name:'list' })
-                } 
-              });
+            title: 'Registro ingresado correctamente!',
+            showDenyButton: false,
+            showCancelButton: false,
+            confirmButtonText: 'OK',
+            denyButtonText: `Cancelar`,
+            allowOutsideClick: false
+        }).then((result) => {
+
+            if (result.isConfirmed) {
+                registerStore.setDateLastRegister(registerForm.fecha);
+                router.push({ name: 'list' })
+            }
+        });
     }
 
 }
@@ -249,7 +250,7 @@ const handleLastRegisterEdit = (id: string | undefined) => {
 
         }).then((result) => {
 
-            if (result.isConfirmed) {                
+            if (result.isConfirmed) {
 
                 registerStore.setId(id);
                 router.push({ name: 'edit' });
