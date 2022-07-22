@@ -9,7 +9,7 @@
         </button>
 
         <p class="me-4">
-            <!-- <p class="text-center align-content-center me-4"> -->
+            
 
             <img src="../../../assets/lechitapp.svg" alt="bebe" class="img-responsive imgBebe">
             <span class="float-end align-content-center mt-3 badge" :class="ui.darkMode ? 'bg-black text-success' : 'bg-success text-info'">{{ dateTimeNow }}</span>
@@ -21,7 +21,7 @@
             <div class="offcanvas-header">
                 <h5 class="offcanvas-title" id="offcanvasExampleLabel"
                     :class="ui.darkMode ? 'text-success' : 'text-white'">
-                    <strong>MENÚ</strong>
+                    <strong>LECHITAPP</strong>
                 </h5>
                 <button type="button" class="btn-close text-reset"
                     :class="ui.darkMode ? 'btn-close-dark' : 'btn-close-white'" data-bs-dismiss="offcanvas"
